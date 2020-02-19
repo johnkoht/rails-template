@@ -35,6 +35,10 @@ yarn-debug.log*
 /capybara-*.html
 
 # Never check passwords into source control!
-/config/database.yml
 /config/master.key
-/.env
+
+# Ignore local .env files like .env.development.local
+# but not shared .env files like .env.development or
+# example files
+.env.*.local
+!.env.*.example

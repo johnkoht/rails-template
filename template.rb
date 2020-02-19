@@ -12,7 +12,10 @@ def apply_template!
   template "README.md.tt", force: true
   remove_file "README.rdoc"
 
-  template "example.env.tt"
+  # Copy the .env files for local development
+  template "env.development.tt", ".env.development"
+  template "env.development.local.example.tt", ".env.development.local.example"
+
   copy_file "editorconfig", ".editorconfig"
   copy_file "gitignore", ".gitignore", force: true
   copy_file "overcommit.yml", ".overcommit.yml"
