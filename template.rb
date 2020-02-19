@@ -126,18 +126,22 @@ end
 
 def git_repo_url
   @git_repo_url ||=
-    ask_with_default("What is the git remote URL for this project?", :blue, "skip")
+    ask_with_default("What is the git remote URL for this project?", :yellow, "skip")
 end
 
 def production_hostname
   @production_hostname ||=
-    ask_with_default("Production hostname?", :blue, "example.com")
+    ask_with_default("Production hostname?", :yellow, "example.com")
 end
 
 def gemfile_requirement(name)
   @original_gemfile ||= IO.read("Gemfile")
   req = @original_gemfile[/gem\s+['"]#{name}['"]\s*(,[><~= \t\d\.\w'"]*)?.*$/, 1]
   req && req.gsub("'", %(")).strip.sub(/^,\s*"/, ', "')
+end
+
+def api_only?
+  options[:api]
 end
 
 def ask_with_default(question, color, default)
@@ -161,7 +165,7 @@ def any_local_git_commits?
 end
 
 def apply_bootstrap?
-  ask_with_default("Use Bootstrap gems, layouts, views, etc.?", :blue, "no")\
+  ask_with_default("Use Bootstrap gems, layouts, views, etc.?", :yellow, "no")\
     =~ /^y(es)?/i
 end
 
