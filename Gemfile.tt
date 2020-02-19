@@ -56,6 +56,9 @@ group :development do
   gem "binding_of_caller"
   gem "bullet"
   gem "colorize"
+  gem "guard", ">= 2.2.2", require: false
+  gem "guard-livereload", require: false
+  gem 'guard-rspec', require: false
   gem "letter_opener"
   gem "listen"<%= gemfile_requirement("listen") %>
   gem "rubocop", ">= 0.70.0", require: false

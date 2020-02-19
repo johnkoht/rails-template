@@ -16,14 +16,17 @@ def apply_template!
   template "env.development.tt", ".env.development"
   template "env.development.local.example.tt", ".env.development.local.example"
 
+  # Setup local development configuration files
   copy_file "editorconfig", ".editorconfig"
   copy_file "gitignore", ".gitignore", force: true
   copy_file "overcommit.yml", ".overcommit.yml"
   template "ruby-version.tt", ".ruby-version", force: true
   copy_file "simplecov", ".simplecov"
 
+  # Configuration for development
   copy_file "Guardfile"
   copy_file "Procfile"
+  copy_file "foreman", ".foreman"
 
   apply "Rakefile.rb"
   apply "config.ru.rb"
