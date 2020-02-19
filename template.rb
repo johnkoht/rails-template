@@ -28,15 +28,18 @@ def apply_template!
   copy_file "Procfile"
   copy_file "foreman", ".foreman"
 
+  # Running rails, rake, etc
   apply "Rakefile.rb"
   apply "config.ru.rb"
+
+  # Run the application templates
   apply "app/template.rb"
   apply "bin/template.rb"
-  apply "circleci/template.rb"
+  # apply "circleci/template.rb"
   apply "config/template.rb"
   apply "doc/template.rb"
   apply "lib/template.rb"
-  apply "test/template.rb"
+  # apply "test/template.rb"
 
   apply "variants/bootstrap/template.rb" if apply_bootstrap?
 
