@@ -41,6 +41,12 @@ def apply_template!
   apply "lib/template.rb"
   apply "spec/template.rb"
 
+  # Install rack_mini_profiler
+  system("bundle exec rails g rack_profiler:install")
+
+  # Install simple_form
+  system("rails generate simple_form:install #{"--bootstrap" if apply_bootstrap?}")
+
   apply "variants/bootstrap/template.rb" if apply_bootstrap?
 
   git :init unless preexisting_git_repo?
@@ -178,6 +184,10 @@ def any_local_git_commits?
 end
 
 def apply_bootstrap?
+  @apply_bootstrap ||= ask_about_bootstrap
+end
+
+def ask_about_bootstrap
   ask_with_default("Use Bootstrap gems, layouts, views, etc.?", :yellow, "no")\
     =~ /^y(es)?/i
 end

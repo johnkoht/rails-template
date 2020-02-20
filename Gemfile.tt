@@ -14,7 +14,7 @@ gem "bootsnap"<%= gemfile_requirement("bootsnap") %>, require: false
 
 # Monitoring/Exceptions
 gem "honeybadger"
-gem "rack-mini-profiler"
+gem "rack-mini-profiler", require: false
 # gem "skylight"
 
 # Background Workers
