@@ -59,6 +59,11 @@ def apply_template!
   template "rubocop.yml.tt", ".rubocop.yml"
   run_rubocop_autocorrections
 
+  # Uncomment Bullet.enable = true. When we add bullet config
+  # to the development.rb file earlier, our database.yml is not
+  # setup so any commands afterwards will fail.
+  uncomment_lines "config/environments/development.rb", /Bullet\.enable = true/
+
   unless any_local_git_commits?
     git add: "-A ."
     git commit: "-n -m 'Set up project'"
