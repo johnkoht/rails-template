@@ -25,6 +25,8 @@ gem "sidekiq-failures"
 # Extensions
 gem "devise"
 gem "kaminari"
+# Intercept emails for staging/review apps
+gem "recipient_interceptor"
 
 # Views
 gem "bootstrap"
@@ -54,6 +56,8 @@ group :development do
   gem "annotate"
   gem "better_errors"
   gem "binding_of_caller"
+  gem "brakeman", require: false
+  gem "bundler-audit", ">= 0.5.0", require: false
   gem "bullet"
   gem "colorize"
   gem "guard", ">= 2.2.2", require: false
@@ -61,9 +65,14 @@ group :development do
   gem 'guard-rspec', require: false
   gem "letter_opener"
   gem "listen"<%= gemfile_requirement("listen") %>
+  gem "overcommit", ">= 0.37.0", require: false
+  gem "rack-livereload"
   gem "rubocop", ">= 0.70.0", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
+  gem "simplecov", require: false
+  gem "terminal-notifier", require: false
+  gem "terminal-notifier-guard", require: false
 end
 
 group :test do
@@ -74,7 +83,6 @@ group :test do
   gem "rspec-rails", "4.0.0.beta4"
   # gem "selenium-webdriver"
   gem "shoulda-matchers"
-  gem "simplecov", require: false
   # gem "timecop"
   gem "webmock"
   # gem "webdrivers"

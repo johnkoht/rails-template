@@ -2,14 +2,21 @@
 
 def setup!
   within_project_root do
+    # Ensure the right ruby version is installed/used
     test "ruby -v" => ruby_version
+
+    # Install core dependencies
     run  "gem install bundler #{bundler_ver_arg} --no-document --conservative"
     run  "bundle install"
     run  "bin/yarn install" if File.exist?("yarn.lock")
     run  "bundle exec overcommit --install"
-    copy "example.env"
+
+    # Setup local environment
+    copy ".env.development.local.example"
     copy "config/database.example.yml"
     test_local_env_contains_required_keys
+
+    # Run rails commands
     run  "bin/rake tmp:create"
     run  "bin/rake db:create:all"
     run  "bin/rake db:migrate"
@@ -77,10 +84,10 @@ end
 def test_local_env_contains_required_keys
   keys = ->(f) { IO.readlines(f).map { |l| l[/^([^#\s][^=\s]*)/, 1] }.compact }
 
-  log(:yellow, "test .env contents") do
-    missing = keys["example.env"] - keys[".env"]
+  log(:yellow, "test .env.development.local contents") do
+    missing = keys[".env.development.local.example"] - keys[".env.development.local"]
     if missing.any?
-      die("Your .env file is missing #{missing.join(', ')}")
+      die("Your .env.development.local file is missing #{missing.join(', ')}")
     end
   end
 end

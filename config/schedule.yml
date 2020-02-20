@@ -1,0 +1,7 @@
+# Add cron jobs through this YAML file
+# https://github.com/ondrejbartas/sidekiq-cron#adding-cron-job
+
+# scheduled_worker_name:
+#   cron: "0 6,18 * * *"
+#   class: "WorkerToCall"
+#   queue: "default"

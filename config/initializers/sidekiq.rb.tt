@@ -1,10 +1,26 @@
 require "sidekiq/web"
+require 'sidekiq/cron/web'
 
-sidekiq_username = ENV.fetch("SIDEKIQ_WEB_USERNAME")
-sidekiq_password = ENV.fetch("SIDEKIQ_WEB_PASSWORD")
+# Basic auth for sidekiq UI
+Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+  ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(username), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_WEB_USERNAME"])) &
+    ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_WEB_PASSWORD"]))
+end
 
-Sidekiq::Web.app_url = "/"
-Sidekiq::Web.use(Rack::Auth::Basic, "Application") do |username, password|
-  username == sidekiq_username &&
-    ActiveSupport::SecurityUtils.secure_compare(password, sidekiq_password)
+# Enable delay for things like mailers, e.g. Mailer.delay.send_something(args)
+Sidekiq::Extensions.enable_delay!
+
+# This will not push sidekiq jobs into redis
+# but trigger them inline. Good for development sometimes
+if ENV['SKIP_SIDEKIQ']
+  require 'sidekiq/testing'
+  Sidekiq::Testing.inline!
+end
+
+# If you need scheduled jobs
+schedule_file = "config/schedule.yml"
+schedule_data = File.exists?(schedule_file) && YAML.load_file(schedule_file)
+
+if Sidekiq.server?
+  Sidekiq::Cron::Job.load_from_hash(schedule_data)
 end

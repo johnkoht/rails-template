@@ -18,15 +18,27 @@ insert_into_file "config/environments/production.rb",
   <<-RUBY
 
   # Production email config
-  config.action_mailer.delivery_method = :postmark
-  config.action_mailer.postmark_settings = {
-    api_token: ENV.fetch("POSTMARK_API_KEY")
-  }
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = {
-    host: "#{production_hostname}",
-    protocol: "https"
+
+  config.action_mailer.smtp_settings = {
+    address:              ENV["SMTP_ADDRESS"],
+    domain:               ENV["SITE_URL"],
+    port:                 ENV["SMTP_PORT"],
+    enable_starttls_auto: true,
+    user_name:            ENV["SMTP_USER_NAME"],
+    password:             ENV["SMTP_PASSWORD"],
+    authentication:       ENV["SMTP_AUTHENTICATION"]
   }
-  config.action_mailer.asset_host = "https://#{production_hostname}"
+
+  if ENV["RECIPIENT_INTERCEPTOR_EMAIL"]
+    Mail.register_interceptor RecipientInterceptor.new(ENV["RECIPIENT_INTERCEPTOR_EMAIL"])
+  end
+
+  config.action_mailer.default_url_options = {
+    host:     "#{production_hostname}",
+    protocol: (ENV["RAILS_FORCE_SSL"].present? ? "https" : "http")
+  }
+  config.action_mailer.asset_host = "#{ENV["RAILS_FORCE_SSL"].present? ? "https" : "http"}://#{production_hostname}"
   RUBY
 end
