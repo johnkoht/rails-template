@@ -22,4 +22,5 @@ remove_dir "app/jobs"
 empty_directory_with_keep_file "app/workers"
 
 # Create a services directory
+empty_directory_with_keep_file "app/forms"
 empty_directory_with_keep_file "app/services"

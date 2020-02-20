@@ -39,7 +39,7 @@ def apply_template!
   apply "config/template.rb"
   apply "doc/template.rb"
   apply "lib/template.rb"
-  # apply "test/template.rb"
+  apply "spec/template.rb"
 
   apply "variants/bootstrap/template.rb" if apply_bootstrap?
 
@@ -49,7 +49,6 @@ def apply_template!
   run_with_clean_bundler_env "bin/setup"
   run_with_clean_bundler_env "bin/rails webpacker:install"
   create_initial_migration
-  generate_spring_binstubs
 
   binstubs = %w[
     annotate brakeman bundler bundler-audit guard rubocop sidekiq
