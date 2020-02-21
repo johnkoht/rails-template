@@ -26,6 +26,7 @@ def apply_template!
   # Configuration for development
   copy_file "Guardfile"
   copy_file "Procfile"
+  copy_file "Procfile.dev"
   copy_file "foreman", ".foreman"
 
   # Running rails, rake, etc
