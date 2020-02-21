@@ -1,4 +1,4 @@
-module MetaTagsHelper
+module MetaTagHelper
   def default_meta_tags
     {
       title:          default_title,
