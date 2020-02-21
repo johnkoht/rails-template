@@ -1,6 +1,6 @@
 source_paths.unshift(File.dirname(__FILE__))
 
-apply "Gemfile.rb"
+# apply "Gemfile.rb"
 apply "app/assets/stylesheets/application.scss.rb"
 copy_file "app/assets/javascripts/bootstrap.js"
 copy_file "app/assets/stylesheets/bootstrap.scss"
@@ -15,4 +15,4 @@ copy_file "lib/templates/erb/scaffold/edit.html.erb"
 copy_file "lib/templates/erb/scaffold/index.html.erb"
 copy_file "lib/templates/erb/scaffold/new.html.erb"
 copy_file "lib/templates/erb/scaffold/show.html.erb"
-copy_file "test/helpers/navbar_helper_test.rb"
+# copy_file "test/helpers/navbar_helper_test.rb"
