@@ -31,6 +31,7 @@ gem "recipient_interceptor"
 # Views
 gem "bootstrap"
 gem "flash_rails_messages"
+gem "font-awesome-rails"
 gem "inline_svg"
 gem "meta-tags"
 gem "rack-canonical-host"
