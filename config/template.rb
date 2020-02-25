@@ -12,7 +12,7 @@ copy_file "config/schedule.yml"
 
 # Add the home route
 gsub_file "config/routes.rb", /  # root 'welcome#index'/ do
-  '  root "home#index"'
+  '  root "application#index"'
 end
 
 # Copy initializers over
@@ -31,6 +31,6 @@ apply "config/environments/development.rb"
 apply "config/environments/production.rb"
 apply "config/environments/test.rb"
 
-# The default home route as well as mount sidekiq
-route 'root "home#index"'
+# The default application route as well as mount sidekiq
+route 'root "application#index"'
 route %Q(mount Sidekiq::Web => "/sidekiq" # monitoring console\n)

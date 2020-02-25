@@ -46,9 +46,13 @@ def apply_template!
   system("bundle exec rails g rack_profiler:install")
 
   # Install simple_form
-  system("rails generate simple_form:install #{"--bootstrap" if apply_bootstrap?}")
+  system("rails generate simple_form:install --bootstrap")
 
-  apply "variants/bootstrap/template.rb" if apply_bootstrap?
+  # Install devise
+  system("rails generate devise:install")
+  system("rails generate devise:views")
+
+  # apply "variants/bootstrap/template.rb" if apply_bootstrap?
 
   git :init unless preexisting_git_repo?
   empty_directory ".git/safe"
@@ -95,7 +99,7 @@ def add_template_repository_to_source_path
     at_exit { FileUtils.remove_entry(tempdir) }
     git clone: [
       "--quiet",
-      "https://github.com/mattbrictson/rails-template.git",
+      "https://github.com/johnkoht/rails-template.git",
       tempdir
     ].map(&:shellescape).join(" ")
 

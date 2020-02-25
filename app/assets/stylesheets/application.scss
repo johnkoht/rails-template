@@ -1,2 +1,86 @@
-//= require_tree .
-//= require_self
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+@import "bootstrap/functions";
+// Wrap the default bootstrap variables so we can override them
+@import "settings/bootstrap-variables";
+@import "bootstrap/mixins";
+@import "bootstrap/root";
+@import "bootstrap/reboot";
+
+
+
+/*
+  Bootstrap Componenets: use only what you need
+*/
+
+// @import "bootstrap/type";
+// @import "bootstrap/images";
+// @import "bootstrap/code";
+// @import "bootstrap/grid";
+// @import "bootstrap/tables";
+// @import "bootstrap/forms";
+// @import "bootstrap/buttons";
+// @import "bootstrap/transitions";
+// @import "bootstrap/dropdown";
+// @import "bootstrap/button-group";
+// @import "bootstrap/input-group";
+// @import "bootstrap/custom-forms";
+// @import "bootstrap/nav";
+// @import "bootstrap/navbar";
+// @import "bootstrap/card";
+// @import "bootstrap/breadcrumb";
+// @import "bootstrap/pagination";
+// @import "bootstrap/badge";
+// @import "bootstrap/jumbotron";
+// @import "bootstrap/alert";
+// @import "bootstrap/progress";
+// @import "bootstrap/media";
+// @import "bootstrap/list-group";
+// @import "bootstrap/close";
+// @import "bootstrap/toasts";
+// @import "bootstrap/modal";
+// @import "bootstrap/tooltip";
+// @import "bootstrap/popover";
+// @import "bootstrap/carousel";
+// @import "bootstrap/spinners";
+// @import "bootstrap/utilities";
+// @import "bootstrap/print";
+
+
+
+
+/*
+  Custom Components
+
+  Add any custom components that you'll need for your
+  particular project. This can be completely custom
+  or a meta components based on bootstrap components
+  and utilities
+*/
+
+// @import "components/my_component"
+
+
+
+/*
+  Custom Utilities
+
+  Add custom utility classes that you might need for
+  your project. Ensure that bootstrap doesn't already
+  have that same utility.
+*/
+
+// @import "utilities/utility"
+

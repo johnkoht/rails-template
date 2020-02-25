@@ -38,6 +38,7 @@ Metrics/ClassLength:
     - "test/**/*"
 
 Metrics/LineLength:
+  Max: 100
   Exclude:
     - "config/**/*"
     - "db/**/*"
@@ -99,3 +100,6 @@ Style/StringLiterals:
 
 Style/TrivialAccessors:
   AllowPredicates: true
+
+Style/SymbolArray:
+  Enabled: false
