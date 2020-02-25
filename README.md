@@ -1,15 +1,9 @@
-# mattbrictson/rails-template
+# Rails Template
+
+This is a fork of [mattbrictson/rails-template](https://github.com/mattbrictson/rails-template) with lots of customizations based on our workflow.
 
 ## Description
-
-This is the application template that I use for my Rails 6 projects. As a freelance Rails developer, I need to be able to start new projects quickly and with a good set of defaults. I've assembled this template over the years to include best-practices, tweaks, documentation, and personal preferences, while still generally adhering to the "Rails way".
-
-For older versions of Rails, use these branches:
-
-* [Rails 4.2.x](https://github.com/mattbrictson/rails-template/tree/rails-42)
-* [Rails 5.0.x](https://github.com/mattbrictson/rails-template/tree/rails-50)
-* [Rails 5.1.x](https://github.com/mattbrictson/rails-template/tree/rails-51)
-* [Rails 5.2.x](https://github.com/mattbrictson/rails-template/tree/rails-52)
+This is a Ruby on Rails project template to kickstart development of new projects. This is a fairly opinionated template based on our experience and preferred style.
 
 ## Requirements
 
@@ -17,9 +11,7 @@ This template currently works with:
 
 * Rails 6.0.x
 * PostgreSQL
-* chromedriver
-
-If you need help setting up a Ruby development environment, check out my [Rails OS X Setup Guide](https://mattbrictson.com/rails-osx-setup-guide).
+* Redis
 
 ## Installation
 
@@ -29,7 +21,7 @@ To make this the default Rails application template on your system, create a `~/
 
 ```
 -d postgresql
--m https://raw.githubusercontent.com/mattbrictson/rails-template/master/template.rb
+-m https://raw.githubusercontent.com/johnkoht/rails-template/master/template.rb
 ```
 
 ## Usage
@@ -44,7 +36,7 @@ To generate a Rails application using this template, pass the `-m` option to `ra
 ```
 rails new blog \
   -d postgresql \
-  -m https://raw.githubusercontent.com/mattbrictson/rails-template/master/template.rb
+  -m https://raw.githubusercontent.com/johnkoht/rails-template/master/template.rb
 ```
 
 *Remember that options must go after the name of the application.* The only database supported by this template is `postgresql`.
@@ -65,75 +57,62 @@ The template will perform the following steps:
 4. Commit everything to git
 5. Push the project to the remote git repository you specified
 
-## What is included?
 
-#### These gems are added to the standard Rails stack
+## What's included?
 
-* Core
-    * [active_type][] – for building simple and effective form/service objects
-    * [sidekiq][] – Redis-based job queue implementation for Active Job
-* Configuration
-    * [dotenv][] – in place of the Rails `secrets.yml`
-* Utilities
-    * [annotate][] – auto-generates schema documentation
-    * [autoprefixer-rails][] – automates cross-browser CSS compatibility
-    * [awesome_print][] – try `ap` instead of `puts`
-    * [better_errors][] – useful error pages with interactive stack traces
-    * [guard][] – runs tests as you develop; mandatory for effective TDD
-    * [livereload][] – magically refreshes browsers whenever you save a file
-    * [rubocop][] – enforces Ruby code style
-    * [xray-rails][] – inspect view partials in the browser
-* Security
-    * [brakeman][] and [bundler-audit][] – detect security vulnerabilities
-* Testing
-    * [simplecov][] – code coverage reports
-    * [shoulda][] – shortcuts for common ActiveRecord tests
+There are a bunch of gems included in the project, most are based on personal preference and experience.
 
-#### Postmark
+**Server**
+- [puma](https://github.com/puma/puma) A Ruby/Rack web server built for concurrency
+- [bootsnap](https://github.com/Shopify/bootsnap) Boot large Ruby/Rails apps faster
 
-I like to use [Postmark][] for transactional email, and so I've included the [postmark-rails][] gem and configured it in `environments/production.rb`. Make sure to sign up for a Postmark account to get an API key, or switch to your own preferred email provider before deploying your app.
+**Application Gems**
+- [devise](https://github.com/heartcombo/devise) Flexible authentication solution for Rails with Warden
+- [kaminari](https://github.com/kaminari/kaminari) for pagination
 
-#### Bootstrap integration (optional)
+**Background Workers**
+- [sidekiq](https://github.com/mperham/sidekiq) Simple, efficient background processing for Ruby
+- [sidekiq-cron](https://github.com/ondrejbartas/sidekiq-cron) Scheduler / Cron for Sidekiq jobs
+- [sidekiq-failures](https://github.com/mhfs/sidekiq-failures) Keep track of Sidekiq failed jobs
 
-[Bootstrap][]-related features are opt-in. To apply these to your project, answer "yes" when prompted.
+**UI/Views**
+- [bootstrap](https://github.com/twbs/bootstrap-rubygem) Mixins, scaffolding, layout
+- [meta-tags](https://github.com/kpumuk/meta-tags) Search Engine Optimization (SEO) for Ruby on Rails applications
+- [rack-canonical-host](https://github.com/tylerhunt/rack-canonical-host) Rack middleware for defining a canonical host name
+- [sass-rails](https://github.com/rails/sass-rails) Ruby on Rails stylesheet engine for Sass
+- [simple_form](https://github.com/heartcombo/simple_form) Forms made easy for Rails! It's tied to a simple DSL, with no opinion on markup
+- [turbolinks](https://github.com/turbolinks/turbolinks) Turbolinks makes navigating your web application faster
+- [webpacker](https://github.com/rails/webpacker) Use Webpack to manage app-like JavaScript modules in Rails
 
-* Bootstrap-themed scaffold templates
-* Application layout that includes Bootstrap-style navbar and boilerplate
-* View helpers for generating common Bootstrap markup
+**Monitoring/Exceptions**
+- [honeybadger](https://github.com/honeybadger-io/honeybadger-ruby) Ruby gem for reporting errors to honeybadger.io
+
+**Development Gems**
+- [active_record_query_trace](https://github.com/brunofacca/active-record-query-trace) Rails plugin that logs/displays a backtrace of all SQL queries executed by Active Record
+- [annotate](https://github.com/ctran/annotate_models) Annotate Rails classes with schema and routes info
+- [awesome_print](https://github.com/awesome-print/awesome_print) Pretty print your Ruby objects with style -- in full color and with proper indentation
+- [better_errors](https://github.com/BetterErrors/better_errors) Better error page for Rack apps
+- [brakeman](https://github.com/presidentbeef/brakeman) A static analysis security vulnerability scanner for Ruby on Rails applications
+- [bullet](https://github.com/flyerhzm/bullet) Help to kill N+1 queries and unused eager loading
+- [bundler-audit](https://github.com/rubysec/bundler-audit) Patch-level verification for Bundler
+- [dotenv-rails](https://github.com/bkeepers/dotenv) A Ruby gem to load environment variables from `.env`
+- [guard](https://github.com/guard/guard) Guard is a command line tool to easily handle events on file system modifications
+- [pry-rails](https://github.com/rweng/pry-rails) A runtime developer console and IRB alternative with powerful introspection capabilities
+- [letter_opener](https://github.com/ryanb/letter_opener) Preview mail in the browser instead of sending
+- [rubocop](https://github.com/rubocop-hq/rubocop) A Ruby static code analyzer and formatter, based on the community Ruby style guide
+- [rubocop-rails](https://github.com/rubocop-hq/rubocop-rails) A RuboCop extension focused on enforcing Rails best practices and coding conventions
+- [rubocop-performance](https://github.com/rubocop-hq/rubocop-performance) An extension of RuboCop focused on code performance checks
+
+**Testing Gems**
+- [database_cleaner](https://github.com/DatabaseCleaner/database_cleaner) Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing
+- [rails-controller-testing](https://github.com/rails/rails-controller-testing) Brings back `assigns` and `assert_template` to your Rails tests
+- [rspec-rails](https://github.com/rspec/rspec-rails) RSpec for Rails-3+
+- [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers) Simple one-liner tests for common Rails functionality
+- [simplecov](https://github.com/colszowka/simplecov) Code coverage for Ruby 1.9+ with a powerful configuration library and automatic merging of coverage across test suites
+- [webmock](https://github.com/bblimke/webmock) Library for stubbing and setting expectations on HTTP requests in Ruby
 
 #### Other tweaks that patch over some Rails shortcomings
 
 * A much-improved `bin/setup` script
 * Log rotation so that development and test Rails logs don’t grow out of control
 
-## How does it work?
-
-This project works by hooking into the standard Rails [application templates][] system, with some caveats. The entry point is the [template.rb][] file in the root of this repository.
-
-Normally, Rails only allows a single file to be specified as an application template (i.e. using the `-m <URL>` option). To work around this limitation, the first step this template performs is a `git clone` of the `mattbrictson/rails-template` repository to a local temporary directory.
-
-This temporary directory is then added to the `source_paths` of the Rails generator system, allowing all of its ERb templates and files to be referenced when the application template script is evaluated.
-
-Rails generators are very lightly documented; what you’ll find is that most of the heavy lifting is done by [Thor][]. The most common methods used by this template are Thor’s `copy_file`, `template`, and `gsub_file`. You can dig into the well-organized and well-documented [Thor source code][thor] to learn more.
-
-[active_type]:https://github.com/makandra/active_type
-[sidekiq]:http://sidekiq.org
-[dotenv]:https://github.com/bkeepers/dotenv
-[annotate]:https://github.com/ctran/annotate_models
-[autoprefixer-rails]:https://github.com/ai/autoprefixer-rails
-[awesome_print]:https://github.com/michaeldv/awesome_print
-[better_errors]:https://github.com/charliesome/better_errors
-[guard]:https://github.com/guard/guard
-[livereload]:https://github.com/guard/guard-livereload
-[rubocop]:https://github.com/bbatsov/rubocop
-[xray-rails]:https://github.com/brentd/xray-rails
-[Postmark]:http://postmarkapp.com
-[postmark-rails]:http://www.rubydoc.info/gems/postmark-rails/0.12.0
-[brakeman]:https://github.com/presidentbeef/brakeman
-[bundler-audit]:https://github.com/rubysec/bundler-audit
-[shoulda]:https://github.com/thoughtbot/shoulda
-[simplecov]:https://github.com/colszowka/simplecov
-[Bootstrap]:http://getbootstrap.com
-[application templates]:http://guides.rubyonrails.org/generators.html#application-templates
-[template.rb]: template.rb
-[thor]: https://github.com/erikhuda/thor
